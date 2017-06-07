@@ -2,7 +2,7 @@ doctype html
 html
   head
     title= `${title} | ${h.siteName}`
-    link(rel='stylesheet', href='/dist/style.css')
+    link(rel='stylesheet' href='/dist/style.css')
     link(rel="shortcut icon" type="image/png" href="/images/icons/doughnut.png")
     meta(name="viewport" content="width=device-width, initial-scale=1")
   body
@@ -48,6 +48,10 @@ html
                   button.flash__remove(onClick="this.parentElement.remove()") &times;
     .content
       block content
+        p This is the default
+        
+    footer
+      block footer
 
     block scripts
       script(src=`https://maps.googleapis.com/maps/api/js?key=${process.env.MAP_KEY}&libraries=places`)

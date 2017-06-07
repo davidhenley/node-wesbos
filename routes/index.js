@@ -3,7 +3,10 @@ const router = express.Router();
 
 // Do work here
 router.get('/', (req, res) => {
-  res.send('Hey! It works!');
+  res.render('hello', {
+    name: 'David',
+    dog: req.query.dog
+  });
 });
 
 router.get('/reverse/:name', (req, res) => {
