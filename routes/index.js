@@ -5,9 +5,10 @@ const {
   addStore,
   createStore
 } = require('../controllers/storeController');
+const { catchErrors } = require('../handlers/errorHandlers');
 
 router.get('/', homePage);
 router.get('/add', addStore);
-router.post('/add', createStore)
+router.post('/add', catchErrors(createStore));
 
 module.exports = router;
