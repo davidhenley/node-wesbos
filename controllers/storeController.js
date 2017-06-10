@@ -42,6 +42,12 @@ exports.addStore = (req, res) => {
   res.render('editStore', { title: 'Add Store' });
 };
 
+exports.getStoreBySlug = async (req, res, next) => {
+  const store = await Store.findOne({ slug: req.params.slug });
+  if (!store) return next();
+  res.render('store', { store, title: store.name });
+};
+
 exports.createStore = async (req, res) => {
   const store = await (new Store(req.body)).save();
   req.flash('success', `Successfully created ${store.name}. Care to leave a review?`);

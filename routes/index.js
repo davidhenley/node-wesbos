@@ -6,6 +6,7 @@ const {
   editStore,
   createStore,
   updateStore,
+  getStoreBySlug,
   upload,
   resize
 } = require('../controllers/storeController');
@@ -14,6 +15,8 @@ const { catchErrors } = require('../handlers/errorHandlers');
 router.get('/', catchErrors(getStores));
 router.get('/stores', catchErrors(getStores));
 router.get('/stores/:id/edit', catchErrors(editStore));
+
+router.get('/store/:slug', catchErrors(getStoreBySlug));
 
 router.get('/add', addStore);
 
