@@ -6,6 +6,7 @@ const {
   editStore,
   createStore,
   updateStore,
+  getStoresByTag,
   getStoreBySlug,
   upload,
   resize
@@ -19,6 +20,9 @@ router.get('/stores/:id/edit', catchErrors(editStore));
 router.get('/store/:slug', catchErrors(getStoreBySlug));
 
 router.get('/add', addStore);
+
+router.get('/tags', catchErrors(getStoresByTag));
+router.get('/tags/:tag', catchErrors(getStoresByTag));
 
 router.post('/add',
   upload, catchErrors(resize),
