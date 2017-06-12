@@ -12,7 +12,11 @@ const {
 const {
   login,
   logout,
-  isLoggedIn
+  isLoggedIn,
+  forgot,
+  reset,
+  confirmedPasswords,
+  update
 } = require('../controllers/authController');
 const { catchErrors } = require('../handlers/errorHandlers');
 
@@ -53,9 +57,17 @@ router.post('/register',
 
 router.get('/logout', logout);
 
+router.post('/forgot', catchErrors(forgot))
+
 // User
 router.get('/account', isLoggedIn, account)
 
 router.post('/account', catchErrors(updateAccount));
+
+router.get('/reset/:token', catchErrors(reset));
+router.post('/reset/:token',
+  confirmedPasswords,
+  catchErrors(update)
+);
 
 module.exports = router;

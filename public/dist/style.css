@@ -1102,6 +1102,7 @@ label {
 
 .button {
   border: 0;
+  margin-top: 20px;
   background: #FFC40E;
   color: #303030;
   font-family: 'Panama';
