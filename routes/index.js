@@ -12,7 +12,9 @@ const {
   resize
 } = require('../controllers/storeController');
 const {
-  loginForm
+  loginForm,
+  registerForm,
+  validateRegister
 } = require('../controllers/userController');
 const { catchErrors } = require('../handlers/errorHandlers');
 
@@ -28,6 +30,9 @@ router.get('/tags', catchErrors(getStoresByTag));
 router.get('/tags/:tag', catchErrors(getStoresByTag));
 
 router.get('/login', loginForm);
+router.get('/register', registerForm);
+
+router.post('/register', validateRegister);
 
 router.post('/add',
   upload, catchErrors(resize),
