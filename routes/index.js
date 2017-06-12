@@ -14,8 +14,12 @@ const {
 const {
   loginForm,
   registerForm,
-  validateRegister
+  validateRegister,
+  register
 } = require('../controllers/userController');
+const {
+  login
+} = require('../controllers/authController');
 const { catchErrors } = require('../handlers/errorHandlers');
 
 router.get('/', catchErrors(getStores));
@@ -32,7 +36,11 @@ router.get('/tags/:tag', catchErrors(getStoresByTag));
 router.get('/login', loginForm);
 router.get('/register', registerForm);
 
-router.post('/register', validateRegister);
+router.post('/register',
+  validateRegister,
+  catchErrors(register),
+  login
+);
 
 router.post('/add',
   upload, catchErrors(resize),

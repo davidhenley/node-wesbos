@@ -17,7 +17,7 @@ body {
   margin: 0 auto; }
   @media all and (max-width: 900px) {
     .inner {
-      padding: 0 2rem; } }
+      padding: 2rem; } }
 
 html {
   box-sizing: border-box; }
