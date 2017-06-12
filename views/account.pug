@@ -1,0 +1,12 @@
+extends layout
+
+block content
+  .inner
+    h2= title
+    form(action="/account" method="post")
+      label(for="name") Name
+      //- user is passed down from locals.user
+      input(type="text" name="name" value=user.name)
+      label(for="email") Email Address
+      input(type="email" name="email" value=user.email)
+      input.button(type="submit" value="Update My Account")

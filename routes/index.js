@@ -5,7 +5,9 @@ const {
   loginForm,
   registerForm,
   validateRegister,
-  register
+  register,
+  account,
+  updateAccount
 } = require('../controllers/userController');
 const {
   login,
@@ -50,5 +52,10 @@ router.post('/register',
 );
 
 router.get('/logout', logout);
+
+// User
+router.get('/account', isLoggedIn, account)
+
+router.post('/account', catchErrors(updateAccount));
 
 module.exports = router;
