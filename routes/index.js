@@ -11,6 +11,9 @@ const {
   upload,
   resize
 } = require('../controllers/storeController');
+const {
+  loginForm
+} = require('../controllers/userController');
 const { catchErrors } = require('../handlers/errorHandlers');
 
 router.get('/', catchErrors(getStores));
@@ -23,6 +26,8 @@ router.get('/add', addStore);
 
 router.get('/tags', catchErrors(getStoresByTag));
 router.get('/tags/:tag', catchErrors(getStoresByTag));
+
+router.get('/login', loginForm);
 
 router.post('/add',
   upload, catchErrors(resize),
