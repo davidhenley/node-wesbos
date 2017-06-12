@@ -1,16 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const {
-  getStores,
-  addStore,
-  editStore,
-  createStore,
-  updateStore,
-  getStoresByTag,
-  getStoreBySlug,
-  upload,
-  resize
-} = require('../controllers/storeController');
+const storeController = require('../controllers/storeController');
 const {
   loginForm,
   registerForm,
@@ -18,37 +8,47 @@ const {
   register
 } = require('../controllers/userController');
 const {
-  login
+  login,
+  logout,
+  isLoggedIn
 } = require('../controllers/authController');
 const { catchErrors } = require('../handlers/errorHandlers');
 
-router.get('/', catchErrors(getStores));
-router.get('/stores', catchErrors(getStores));
-router.get('/stores/:id/edit', catchErrors(editStore));
+router.get('/', catchErrors(storeController.getStores));
 
-router.get('/store/:slug', catchErrors(getStoreBySlug));
+// Stores
+router.get('/stores', catchErrors(storeController.getStores));
+router.get('/stores/:id/edit', isLoggedIn, catchErrors(storeController.editStore));
 
-router.get('/add', addStore);
+router.get('/store/:slug', catchErrors(storeController.getStoreBySlug));
 
-router.get('/tags', catchErrors(getStoresByTag));
-router.get('/tags/:tag', catchErrors(getStoresByTag));
+router.get('/tags', catchErrors(storeController.getStoresByTag));
+router.get('/tags/:tag', catchErrors(storeController.getStoresByTag));
 
+router.get('/add', isLoggedIn, storeController.addStore);
+router.post('/add',
+  storeController.upload,
+  catchErrors(storeController.resize),
+  catchErrors(storeController.createStore)
+);
+
+router.post('/add/:id',
+  storeController.upload,
+  catchErrors(storeController.resize),
+  catchErrors(storeController.updateStore)
+);
+
+// Authentication
 router.get('/login', loginForm);
-router.get('/register', registerForm);
+router.post('/login', login);
 
+router.get('/register', registerForm);
 router.post('/register',
   validateRegister,
   catchErrors(register),
   login
 );
 
-router.post('/add',
-  upload, catchErrors(resize),
-  catchErrors(createStore)
-);
-router.post('/add/:id',
-  upload, catchErrors(resize),
-  catchErrors(updateStore)
-);
+router.get('/logout', logout);
 
 module.exports = router;
