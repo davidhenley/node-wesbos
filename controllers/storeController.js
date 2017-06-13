@@ -103,3 +103,22 @@ exports.updateStore = async (req, res) => {
   <a href="/stores/${store.slug}">View Store 👉</a>`);
   res.redirect(`/stores/${store._id}/edit`);
 };
+
+exports.searchStores = async (req, res) => {
+  const stores = await Store
+  // first find stores that match
+  .find({
+    $text: {
+      $search: req.query.q
+    }
+  }, {
+    score: { $meta: 'textScore' }
+  })
+  // then sort them
+  .sort({
+    score: { $meta: 'textScore' }
+  })
+  // then limit to only 5 results
+  .limit(5);
+  res.json(stores);
+};

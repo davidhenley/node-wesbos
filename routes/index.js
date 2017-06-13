@@ -70,4 +70,7 @@ router.post('/reset/:token',
   catchErrors(update)
 );
 
+// API Endpoints
+router.get('/api/search', catchErrors(storeController.searchStores));
+
 module.exports = router;
