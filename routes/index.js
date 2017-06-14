@@ -73,6 +73,9 @@ router.post('/reset/:token',
 // Map
 router.get('/map', storeController.mapPage);
 
+// hearts
+router.get('/hearts', isLoggedIn, catchErrors(storeController.getHearts));
+
 // API Endpoints
 router.get('/api/search', catchErrors(storeController.searchStores));
 router.get('/api/stores/near', catchErrors(storeController.mapStores));
