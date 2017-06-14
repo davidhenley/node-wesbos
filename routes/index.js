@@ -70,6 +70,9 @@ router.post('/reset/:token',
   catchErrors(update)
 );
 
+// Map
+router.get('/map', storeController.mapPage);
+
 // API Endpoints
 router.get('/api/search', catchErrors(storeController.searchStores));
 router.get('/api/stores/near', catchErrors(storeController.mapStores));
