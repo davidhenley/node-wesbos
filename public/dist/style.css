@@ -1108,6 +1108,9 @@ label {
   font-family: 'Panama';
   font-weight: 600; }
 
+.button--notop {
+  margin-top: 0; }
+
 .avatar {
   min-width: 50px;
   height: 50px;

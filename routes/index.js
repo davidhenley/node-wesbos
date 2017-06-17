@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const storeController = require('../controllers/storeController');
+const reviewController = require('../controllers/reviewController');
 const {
   loginForm,
   registerForm,
@@ -75,6 +76,9 @@ router.get('/map', storeController.mapPage);
 
 // hearts
 router.get('/hearts', isLoggedIn, catchErrors(storeController.getHearts));
+
+// Reviews
+router.post('/reviews/:id', isLoggedIn, catchErrors(reviewController.addReview));
 
 // API Endpoints
 router.get('/api/search', catchErrors(storeController.searchStores));
